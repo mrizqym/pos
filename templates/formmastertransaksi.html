@@ -1,0 +1,64 @@
+{% include 'header.html' %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Master Transaksi</h1><br>
+            <!-- <a href="#">Tambah</a> -->
+          </div>
+        </div>
+        <!-- /.row -->
+      </div>  
+      <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+
+        <div class="row">
+          <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Add</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form role="form" action="/simpanformmastertransaksi" method="POST"> 
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="Jumlah_Barang">Jumlah_Barang</label>
+                    <input type="text" required class="form-control" id="Jumlah_Barang" name="Jumlah_Barang" placeholder="Jumlah_Barang">
+                  </div>
+                  <div class="form-group">
+                    <label for="Tanggal_Transaksi">Tanggal_Transaksi</label>
+                    <input type="text" required class="form-control" id="Tanggal_Transaksi" name="Tanggal_Transaksi" placeholder="Tanggal_Transaksi">
+                  </div>
+                  <div class="form-group">
+                    <label for="Total_Harga">Total_Harga</label>
+                    <input type="text" required class="form-control" id="Total_Harga" name="Total_Harga" placeholder="Total_Harga">
+                  </div>
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  {% include 'footer.html' %}

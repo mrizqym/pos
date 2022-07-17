@@ -1,0 +1,128 @@
+{% include 'header.html' %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper " style="background-color: #F4F6F9;">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Master Transaksi</h1>
+          </div>
+        </div>
+        <!-- /.row -->
+      </div> 
+      <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <div id="reportrange" style="background: #fff; border-radius: 5px; margin-block: 10px; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+            <i class="fa fa-calendar"></i>&nbsp;
+            <span></span> <i class="fa fa-caret-down"></i>
+        </div>
+        
+      
+      <script type="text/javascript">
+
+      $(function myFunction() {
+        console.log('asu')
+      })
+
+      $(function() {
+      
+          var start = moment().subtract(29, 'days');
+          var end = moment();
+      
+          function cb(start, end) {
+              $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+              start=start
+              end=end
+              
+      
+          }
+      
+          $('#reportrange').daterangepicker({
+              startDate: start,
+              endDate: end,
+              ranges: {
+                 'Hari ini': [moment(), moment()],
+                 'Kemarin': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                 '7 Hari Terakhir': [moment().subtract(6, 'days'), moment()],
+                 '30 hari terakhir': [moment().subtract(29, 'days'), moment()],
+                 'Bulan ini': [moment().startOf('month'), moment().endOf('month')],
+                 'Bulan lalu': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+              }
+            
+          }, cb);
+
+          $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
+            window.location.href = `/mastertransaksi/${picker.startDate.format('YYYY-MM-DD')}/${picker.endDate.add('d').format('YYYY-MM-DD')}`
+});
+      
+          cb(start, end);
+
+          
+      
+      });
+      </script>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header"><!-- 
+                <h3 class="card-title">Bordered Table</h3>
+              </div> -->
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table class="table table-bordered">
+                  <thead>                  
+                    <tr>
+                      <th style="width: 10px">#</th>
+                      <th>ID TRANSAKSI</th>
+                      <th>Waktu Transaksi</th>
+                      <th>Produk</th>
+                      <th>Jumlah</th>
+                      <th>Total Harga</th>
+                      <th>Profit Bersih</th>
+                    </tr>
+                  </thead>  
+                  <tbody>
+                    {% for i in data %}
+                    <tr>
+                      <td>{{loop.index}}</td>
+                      <td>{{i.id_transaksi}}</td>
+                      <td>{{i.tanggal_transaksi}}</td>
+                      <td>{{i.nama_produk}}</td>
+                      <td>{{i.jumlah_barang}}</td>
+                      <td>Rp. {{ '{0:,}'.format(i.total_harga)}}</td>
+                      <td>Rp. {{ '{0:,}'.format(i.profit_bersih)}}</td>
+
+                    </tr>
+                    {% endfor %}
+
+                    <tr>
+                      <td></td>
+                      <td ></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td style="font-weight:bold">Rp. {{ '{0:,}'.format(profit)}}</td>
+                    </tr>
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  {% include 'footer.html' %} 

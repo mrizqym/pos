@@ -1,0 +1,72 @@
+{% include 'header.html' %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper" style="background-color: #F4F6F9;">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Cart</h1><br>
+            <a href="/create_transaksi" onclick="window.open('/receipt');"><button class="btn btn-primary">Proses Transaksi</button></a>
+          </div>
+        </div>
+        <!-- /.row -->
+      </div>  
+      <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header"><!-- 
+                <h3 class="card-title">Bordered Table</h3>
+              </div> -->
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table class="table table-bordered">
+                  <thead>                  
+                    <tr>
+                      <th style="width: 10px">#</th>
+                      <th>Gambar Produk</th>
+                      <th>Nama Barang</th>
+                      <th>Jumlah Barang</th>
+                      <th>Total</th>
+                      <th>Option</th>
+                    </tr>
+                  </thead>  
+                  <tbody>
+                    {% for i in data %}
+                    <tr>
+                      <td>{{loop.index}}</td>
+                      <td style="flex-direction: row; justify-content:flex-end;"><img src="{{i.id_produk.gambar_produk}}" width="150"/></td>
+                      <td>{{ i.id_produk.nama_produk}}</td>
+                      <td>{{ i.jumalah_barang}}</td>
+                      <td>Rp. {{ '{0:,}'.format(i.id_produk.harga_produk * i.jumalah_barang)}}</td>
+                      <td><a href="/updatecart/{{i.id}}"><button class="btn btn-success">Update</button></a> <a href="/deletecart/{{i.id}}"><button class="btn btn-danger">Delete</button></a>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                      <td style="font-weight:bold ;">Total</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>Rp. {{ '{0:,}'.format(total)}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  {% include 'footer.html' %}
